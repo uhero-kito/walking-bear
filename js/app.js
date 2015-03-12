@@ -5,16 +5,21 @@ function main() {
     game.fps = 20;
 
     game.onload = function () {
-        var bear = new Sprite(32, 32);
-        bear.image = game.assets["img/chara1.png"];
-        game.rootScene.addChild(bear);
-        bear.frame = [6, 6, 7, 7];   // select sprite frame
+        var mainScene = (function () {
+            var scene = new Scene();
+            var bear = new Sprite(32, 32);
+            bear.image = game.assets["img/chara1.png"];
+            bear.frame = [6, 6, 7, 7];
+            bear.tl.moveBy(290, 0, 90)
+                    .scaleTo(-1, 1, 10)
+                    .moveBy(-290, 0, 90)
+                    .scaleTo(1, 1, 10)
+                    .loop();
+            scene.addChild(bear);
+            return scene;
+        })();
 
-        bear.tl.moveBy(288, 0, 90)   // move right
-                .scaleTo(-1, 1, 10)  // turn left
-                .moveBy(-288, 0, 90) // move left
-                .scaleTo(1, 1, 10)   // turn right
-                .loop();             // loop it
+        game.pushScene(mainScene);
     };
 
     game.start(); // start your game!
