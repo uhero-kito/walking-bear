@@ -1,0 +1,16 @@
+{
+    "default_locale" : "ja",
+    "description"    : "enchant.js のテストです",
+    "developer" : {
+        "name" : "takayuki, KITO",
+        "url"  : "https://github.com/uhero-kito"
+    },
+    "icons" : {
+        "128": "/img/icon.png"
+    },
+    "launch_path": "/index.html",
+    "name": "Walking Bear",
+    "type": "web",
+    "version": "1.0.0",
+    "csp": "'default-src' *;'script-src' 'self';'object-src' 'none';'frame-src' 'self';'style-src' 'unsafe-inline' 'self';'connect-src'"
+}
