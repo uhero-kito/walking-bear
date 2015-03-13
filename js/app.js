@@ -22,6 +22,22 @@ function main() {
                 sprite.y = 320;
                 return sprite;
             })();
+            var bg = (function () {
+                var surface = new Surface(320, 320);
+                var context = surface.context;
+                context.fillStyle = (function () {
+                    var grad  = context.createLinearGradient(0, 0, 0, 320);
+                    grad.addColorStop(0, "#cceedd");
+                    grad.addColorStop(0.5, "#bbddcc");
+                    grad.addColorStop(1, "#779988");
+                    return grad;
+                })();
+                context.fillRect(0, 0, 320, 320);
+
+                var sprite = new Sprite(320, 320);
+                sprite.image = surface;
+                return sprite;
+            })();
 
             var DIR_STOP = 0;
             var DIR_LEFT = 1;
@@ -54,6 +70,7 @@ function main() {
                 cursor.frame = [0];
                 direction = DIR_STOP;
             });
+            scene.addChild(bg);
             scene.addChild(bear);
             scene.addChild(cursor);
             return scene;
