@@ -22,11 +22,37 @@ function main() {
                 sprite.y = 320;
                 return sprite;
             })();
-            cursor.addEventListener(Event.TOUCH_START, function () {
+
+            var DIR_STOP = 0;
+            var DIR_LEFT = 1;
+            var DIR_RIGHT = 2;
+            var direction = DIR_STOP; // 現在の方向です
+
+            /**
+             * ボタンをタッチまたはなぞった時に発火する関数です。
+             * カーソルの向きを判定し、キャラクターの方向とカーソルの見た目を変化させます。
+             * 
+             * @param {Event} e
+             */
+            var moveCursor = function (e) {
+                var newDirection = (160 < e.x) ? DIR_RIGHT : DIR_LEFT;
+                if (newDirection !== direction) {
+                    direction = newDirection;
+                    bear.scaleX = (newDirection === DIR_RIGHT) ? 1 : -1;
+                    cursor.frame = [newDirection];
+                }
+            };
+            cursor.addEventListener(Event.TOUCH_START, function (e) {
+                // キャラクターを走らせます
                 bear.frame = [1, 1, 0, 0, 2, 2, 0, 0];
+                moveCursor(e);
             });
+            cursor.addEventListener(Event.TOUCH_MOVE, moveCursor);
             cursor.addEventListener(Event.TOUCH_END, function () {
+                // キャラクターを静止させます
                 bear.frame = [0];
+                cursor.frame = [0];
+                direction = DIR_STOP;
             });
             scene.addChild(bear);
             scene.addChild(cursor);
