@@ -7,11 +7,15 @@ function main() {
     game.onload = function () {
         var mainScene = (function () {
             var scene = new Scene();
-            var bear = new Sprite(32, 32);
-            bear.image = game.assets["img/chara1.png"];
-            bear.frame = [0];
-            bear.x = 160;
-            bear.y = 160;
+            var bear = (function () {
+                var sprite = new Sprite(32, 32);
+                sprite.image = game.assets["img/chara1.png"];
+                sprite.frame = [0];
+                sprite.x = 160;
+                sprite.y = 160;
+                return sprite;
+            })();
+
             scene.addChild(bear);
             return scene;
         })();
