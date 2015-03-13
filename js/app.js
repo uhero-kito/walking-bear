@@ -22,6 +22,12 @@ function main() {
                 sprite.y = 320;
                 return sprite;
             })();
+            cursor.addEventListener(Event.TOUCH_START, function () {
+                bear.frame = [1, 1, 0, 0, 2, 2, 0, 0];
+            });
+            cursor.addEventListener(Event.TOUCH_END, function () {
+                bear.frame = [0];
+            });
             scene.addChild(bear);
             scene.addChild(cursor);
             return scene;
