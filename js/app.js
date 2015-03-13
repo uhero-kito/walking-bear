@@ -44,6 +44,11 @@ function main() {
             var DIR_RIGHT = 2;
             var direction = DIR_STOP; // 現在の方向です
 
+            var dx = {}; // フレーム毎の X 座標の差分です
+            dx[DIR_STOP] = 0;
+            dx[DIR_LEFT] = -5;
+            dx[DIR_RIGHT] = 5;
+
             /**
              * ボタンをタッチまたはなぞった時に発火する関数です。
              * カーソルの向きを判定し、キャラクターの方向とカーソルの見た目を変化させます。
@@ -69,6 +74,11 @@ function main() {
                 bear.frame = [0];
                 cursor.frame = [0];
                 direction = DIR_STOP;
+            });
+
+            bear.addEventListener(Event.ENTER_FRAME, function () {
+                var newX = bear.x + dx[direction];
+                bear.x = Math.min(288, Math.max(0, newX));
             });
             scene.addChild(bg);
             scene.addChild(bear);
